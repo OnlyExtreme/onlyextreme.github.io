@@ -33,6 +33,7 @@ domain: onlyextreme.github.io
 
 # Build settings
 theme: minima
+remote_theme: sighingnow/jekyll-gitbook
 plugins:
   - jekyll-feed
 
