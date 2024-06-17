@@ -30,12 +30,31 @@ url: https://onlyextreme.github.io # the base hostname & protocol for your site,
 github_username:  OnlyExtreme
 domain: onlyextreme.github.io
 
+toc:
+  enabled: true
+  h_min: 1
+  h_max: 3
+
+
+markdown:         kramdown
+kramdown:
+  auto_ids:               true
+  input:                  GFM
+  math_engine:            mathjax
+  smart_quotes:           lsquo,rsquo,ldquo,rdquo
+  toc_levels:             1..6
+  syntax_highlighter:     rouge
+  syntax_highlighter_opts:
+    guess_lang:           true
+
 
 # Build settings
 # theme: minima
 remote_theme: sighingnow/jekyll-gitbook
 plugins:
   - jekyll-feed
+  - jekyll-readme-index
+  - jemoji
 syntax_highlighter_style: colorful
 
 # Exclude from processing.
