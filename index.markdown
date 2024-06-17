@@ -8,3 +8,5 @@ layout: home
 这是一个有趣的博客 QwQ
 
 [我的高考暑假算法竞赛训练笔记](https://onlyextreme.github.io/2024/06/16/高考暑假算法竞赛训练笔记.html)
+
+[计算器联网计划](https://onlyextreme.github.io/2024-06-17-计算器联网计划.html)
