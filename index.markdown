@@ -6,3 +6,5 @@ layout: home
 ---
 
 这是一个有趣的博客 QwQ
+
+[我的高考暑假算法竞赛训练笔记](https://onlyextreme.github.io/2024/06/16/%E9%87%8D%E6%93%8D%E6%97%A7%E4%B8%9A.html)
