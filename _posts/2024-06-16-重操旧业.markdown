@@ -27,3 +27,127 @@
 不行这次排名在 5030，表现分显示大概在中等偏下一点点，下周争取把 E 也做了。
 
 这上分不比游戏好玩 $QwQ$。   
+
+
+# 6-16
+
+今天为什么没做题呢？
+
+因为配置这个 Github Pages 搞了基本上一整天，真有点麻烦。先找了个 Jekyll 主题叫做 [Jekyll-Gitbook](https://github.com/sighingnow/jekyll-gitbook)，然后按照官方的 doc 配置了 Ruby, Gem 和 Jekyll 环境，因为网络问题真是基本上搞了一天才搞定，不过最终效果还是不错的。
+
+# 6-17
+
+今天开始用一篇 [一种程序设计竞赛的训练方法](https://www.cnblogs.com/wawcac-blog/articles/12245307.html) 的方法来练。其中提到了在 CF rating 1000-1400 应该先练 AtCoder 的 ABC 比赛的 B，C 题来提升手速。
+
+**ABC356**:
+
+A: 90s, B: 5min, C: 13min, D: 40min, 这时候看了一眼 standings 发现我四道题做完大概花了 85min 可以排名到 $3000$ 左右，还不错，感觉这场比 $ABC358$ 略难。
+
+A 秒了，B 秒了（感觉 5min 有点久了），C 开始没那么一眼，是一个二进制暴力枚举算法（AtCoder 怎么这么喜欢出二进制枚举题）也还好，D 就有点意思了，相当于是一个数学找规律题，让你求: 
+
+$$
+\sum_{k=0}^{N}popcount(k\And M)
+$$
+
+其中 $popcount$ 指的是二进制表示中 $1$ 的个数。要把这个二进制变形才比较好处理。处理成对 $M$ 中每一个为 $1$ 的二进制位，计算 $0$ 到 $N$ 中二进制同一位也为 $1$ 的个数求和。草稿纸上写一写就会发现它是一个周期数列，然后直接求周期个数再特殊处理剩下的位数就好了。
+
+E 就更难一点。给你一个数列 $A=(A_1,A_2,...,A_n)$，求：
+
+$$
+\sum_{i=1}^{N-1} \sum_{j=i+1}^{N} \lfloor \frac{\max(A_i, A_j)}{\min(A_i, A_j)} \rfloor
+$$
+
+数据范围是 $2\leq N\leq 2\times 10^5$ 且 $1\leq A\leq 10^6$。
+
+不久就发现复杂度应为 $\log$ 级别的但是想到二分去了，思路有点歪了。正解大概是排序后找到每一个向下取整相等的范围并计算这个范围内有多少个数乘起来就好了。至于如何查询区间内有多少个数，愚蠢的我并没有想到使用**前缀和**。
+
+扫了一眼 F 题目好复杂，看了一眼题解要用线段树。
+
+看懂题目了，大意是每个节点有一个权值，权值之差的绝对值小于 $K$ 的节点间有边，问你对某个节点 $x$，其所在连通块的节点数目是多少。另外这道题要求动态维护这个图（加入或去除节点）。
+
+但是题解没太看懂，大意是维护了两个动态开点线段树，其他看不懂了（逃
+
+学学现代 C++，学学 lambda 表达式和 pb_ds 库，还是很好用的。
+
+### Lambda 表达式
+
+结构如下：
+
+```text
+[capture] (parameters) mutable -> return-type {statement}
+```
+
+**capture 捕获子句**：规定所使用的变量，以及使用的方法（引用、值），其中 `&` 表示引用而 `=` 表示通过值使用；
+
+```cpp
+auto f = [x, y]() -> int { return x + y; };
+// 此处按值捕获，那么 x, y 的值只与该表达式出现前的 x, y 值有关，若声明后改变 x, y 的值，输出也不会发生改变
+
+auto g = [&x, &y]() -> int {return x + y; };
+// 此处引用捕获，声明后改变 x, y 再调用会获得更新后结果
+```
+
+**parameters 参数子句**: 表达式参数，可以使用 `auto` 关键字；
+
+```cpp
+auto f = [](int a, int b) -> int {return a + b; };
+cout << f(2, 5) << endl;    // 输出 7
+```
+
+**mutable 可变规则**：若使用该关键字则可在 lambda 表达式内部改变按值捕获的内容，而外部则没有改变。
+
+```cpp
+int a = 0;
+auto f = [a]() mutable { ++a; };
+// 此处若无 mutable 关键字则 ++a 会编译错误，因为是值捕获，所以理论上无法修改该值，加上 mutable 关键字之后即可修改，而且对外部的 a 变量无影响
+```
+
+**Statement Lambda 主体**：基本和普通函数一样，其中可以调用的变量包含：
+
+- 捕获的变量
+- 定义的参数
+- 本地声明的变量
+- 全局变量
+- 在一个 `class` 中声明时，若捕获 `this` 则可以访问该对象的成员
+
+
+然后就是很好用的隐式函数声明：
+```cpp
+int a = [];
+sort(a, a + n, [](int x, int y) {return (x > y);});
+// 这样就可以不用写 cmp 函数了
+```
+
+### C++ 11 真香
+```cpp
+int x[] = {1, 2, 3, 4, 5};
+for (auto i : x)
+    cout << i << endl;
+
+// 以上循环等价于
+for (int i = 0; i < 5; i++)
+```
+
+### pb_ds 库
+
+全程 Policy-Based Data Structure。其中封装了许多常用数据结构，如哈希 (Hash) 表、平衡二叉树（救命的神），Trie 树，堆（优先队列）等。
+
+**堆（优先队列）：**
+
+所需头文件在 `ext/pb_ds/priority_queue.hpp`，声明方法为 `__gnu_pbds::priority_queue<T>`
+
+成员函数和 `queue` 差不多：`push()`, `pop()`, `top()`, `size()`, `empty()`, `modify(point_iterator, const key)`, `erase(point_iterator)`, `join(__gnu_pbds::priority_queue &other)`
+
+**平衡数：**
+
+所需头文件在 `ext/pb_ds/assoc_container.hpp` 和 `ext/pb_ds/tree_policy.hpp` 
+
+构造方法为
+
+```cpp
+__gnu_pbds::tree<std::pair<int, int>,  __gnu_pbds::null_type, std::less<std::pair<int, int> >, __gnu_pbds::rb_tree_tag,  __gnu_pbds::tree_order_statistics_node_update> trr;
+```
+
+成员函数包括：`insert(x)`, `erase(x)`, `order_of_key(x)`, `find_by_order(x)`, `lower_bound(x)`, `upper_bound(x)`, `join(x)`, `split(x, b)`, `empty()`, `size()`
+
+嗯，新版 C++ 还是很好用的，感觉一个文件写下去的话太长了，可能得一天分一次。
