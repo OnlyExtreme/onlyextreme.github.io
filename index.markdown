@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+这是一个有趣的博客 QwQ
