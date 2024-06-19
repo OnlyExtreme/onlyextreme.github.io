@@ -172,3 +172,82 @@ __gnu_pbds::tree<std::pair<int, int>,  __gnu_pbds::null_type, std::less<std::pai
 明天做完这道题要不看看图论？还是打 ABC355 呢？要不复习还是隔天吧，明天做点小题。
 
 说起来我的 esp32 快到了，很快又要多一个项目了~~（逃~~
+
+# 6-19
+
+很好昨天晚上躺床上睡不着就狂想这道题，差不多想清楚了，但是上午一写发现还是一堆问题，调了半天调不出来，找题解一看发现和有一篇差不多，对着一点点看也没找到到底哪里有问题，破防了（有一种回到了高一高二的感觉，尤其是大家都在复健训练）。
+
+决定仔细研读一下 tourists 大佬的 `pb_ds` 代码：
+
+```cpp
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+typedef long long ll;
+
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr); cout.tie(nullptr);
+
+    int q;
+    ll k;
+    cin >> q >> k;
+    const ll inf = 4e18;
+    set<ll> starts;
+    pbds vals;
+    vals.insert(-inf);
+    vals.insert(inf);
+    starts.insert(inf);
+    auto Add = [&](ll x, ll y) {
+        if (y - x > k)
+            starts.insert(y);
+    };
+    auto Remove = [&](ll x, ll y) {
+        if (y - x > k)
+            starts.erase(y);
+    };
+    while (q--) {
+        int op;
+        ll x;
+        cin >> op >> x;
+        if (op == 1) {
+            auto it = vals.find(x);
+            // 此处 STL 或类似容器在使用 find() 函数的时候若未找到目标元素则返回 [name].end()
+            if (it == vals.end()) { // 因此此处是若 x 不存在的情况，此时需要插入 x
+                it = vals.lower_bound(x);   // 先找到 x 的后继的指针
+                Remove(*prev(it), *it);    // prev(it) 是 x 的前驱的指针，先把前驱后继组成的区间断开
+                Add(*prev(it), x);  // 处理 前驱到 x 这段区间是否构成新的长度大于 k 的区间
+                Add(x, *it);    // 同理处理 x 到后继这段区间
+                vals.insert(x);     // 因为 x 是新加的，所以插入到平衡树里
+            } else {    // 此处是 x 存在的情况，此时需要删除 x
+                // 这里 it 是 x 所对指针，prev(it) 是前驱，next(it) 是后继
+                Remove(*prev(it), *it);        
+                Remove(*it, *next(it));     // 这两行把 前驱到 x 和 x 到后继 两个区间分别断开
+                Add(*prev(it), *next(it));  // 处理 前驱到后继 这段区间
+                vals.erase(it);     // 把 x 从平衡树里删除
+            }
+        } else {
+            auto it = starts.upper_bound(x);    // 先找到左端点大于 x 的第一段长度大于 k 的区间位置
+            cout << vals.order_of_key(*it) - vals.order_of_key(*prev(it)) << '\n';  // 因为长度大于 k 的区间内部肯定没有点，所以这里就是右边区间的左端点和左边区间的右端点之间的点的个数
+        }
+    }
+
+    return 0;
+}
+```
+ 
+其中板子和命名习惯是自己的，其他全是 tourists 大佬的，以下是分析：
+
+代码中用维护了一个叫做 `starts` 的 `set`，和一个叫 `vals` 的平衡树，根据命名和后面的代码盲猜 `starts` 是维护了所有长度大于 $k$ 的区间的左端点，而 `vals` 则是用平衡树简单维护了一堆点，用于查询排名（也就是区间和）。
+
+在处理操作 $1$ 的时候，若 $x$ 不存在，需要将 $x$ 插入到数轴上，因此需要处理 $x$ 的前驱和后继，将 $x$ 所在的这一段从 $x$ 位置拆开成分别处理，再把 $x$ 放到平衡树里； $x$ 存在时同理，先把两段都处理了再合并起来处理，然后从平衡树里面删掉。
+
+对于操作 $2$，只用找到在 $x$ 两侧最近的 “长度大于 $K$ 的区间” 之间有多少个点即可，先找两边区间，再平衡树查区间和即可。
+
+原来他们做这道题的重点在于维护的是 长度大于 $K$ 的区间而不是小于等于 $K$ 的，确实这样会简单一些。
+
+另外找到了一个[非常好的介绍 pb_ds 平衡树的博客](https://www.cnblogs.com/redacted-area/p/18063265)。
