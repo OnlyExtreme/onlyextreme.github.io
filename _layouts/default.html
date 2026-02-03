@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,43 +16,50 @@
 </head>
 <body>
 
-<div class="container">
+    <header class="site-header">
+        <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+        <div class="site-subtitle">{{ site.description }}</div>
+    </header>
 
-    <aside class="sidebar-left">
-        <a href="{{ '/' | relative_url }}" class="brand">{{ site.title }}</a>
-        <ul class="nav-menu">
-            <li><a href="{{ '/' | relative_url }}">Index / All</a></li>
-            <li><a href="#">Physics</a></li>
-            <li><a href="#">Photography</a></li>
-            <li><a href="#">Code</a></li>
-            <li><a href="#">About</a></li>
-        </ul>
-        <div style="margin-top: 40px; font-size: 0.85em; color: #666;">
-            <p>19yo Student<br>Physics @ NUS</p>
-        </div>
-    </aside>
+    <div class="container">
+        
+        <aside class="sidebar-left">
+            <h2 class="col-header">About</h2>
+            <div class="bio-text">
+                <p>我是 NUS 物理系的大二学生 (19岁)。</p>
+                <p>正在探索数码时代之前的“模拟生活方式”。喜欢纸质书、手动镜头和胶片感。</p>
+            </div>
+            <ul class="bio-links" style="padding:0;">
+                <li><a href="#">Github</a></li>
+                <li><a href="#">Email</a></li>
+                <li><a href="#">RSS</a></li>
+            </ul>
+        </aside>
 
-    <main>
-        {{ content }}
-    </main>
+        <main>
+            {{ content }}
+        </main>
 
-    <aside class="sidebar-right">
-        <span class="widget-title">Linklog</span>
-        {% for link in site.data.links %}
-        <div style="margin-bottom: 20px; line-height: 1.4;">
-            <a href="{{ link.url }}" style="text-decoration: underline;">{{ link.title }}</a>
-            <span style="color: #888; display: block; font-size: 0.8em;">{{ link.domain }}</span>
-        </div>
-        {% endfor %}
+        <aside class="sidebar-right">
+            <h2 class="col-header">Projects</h2>
+            
+            <div class="project-item">
+                <a href="#" class="project-title">The Archive</a>
+                <div class="project-desc">我的个人博客与知识库，基于 Jekyll 构建。</div>
+            </div>
 
-        <br>
-        <span class="widget-title">Status</span>
-        <div style="font-size: 0.9em; color: #666;">
-            Online<br>Singapore
-        </div>
-    </aside>
+            <div class="project-item">
+                <a href="#" class="project-title">Singapore Impression</a>
+                <div class="project-desc">摄影集企划：记录绿意盎然的城市肌理。</div>
+            </div>
+            
+            <div class="project-item">
+                <a href="#" class="project-title">Cassette Futurism UI</a>
+                <div class="project-desc">复古未来主义风格的音乐管理工具。</div>
+            </div>
+        </aside>
 
-</div>
+    </div>
 
 </body>
 </html>

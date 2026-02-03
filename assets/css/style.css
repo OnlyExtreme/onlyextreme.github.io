@@ -1,141 +1,152 @@
+/* assets/css/style.css */
+
 :root {
     --font-serif: "Georgia", "Times New Roman", "Songti SC", serif;
-    --font-mono: "Menlo", "Consolas", "Monaco", monospace;
-    --bg-color: #fcfbf9;
+    --font-sans: "Inter", "Helvetica Neue", "Arial", "PingFang SC", sans-serif;
+    --bg-color: #ffffff;
     --text-color: #111;
+    --gray-color: #666;
+    /* 定义一个边框颜色变量，方便统一修改 */
+    --border-color: #e0e0e0; 
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: var(--font-serif); /* 默认正文用衬线 */
-    font-size: 16px;
+    font-family: var(--font-sans);
+    font-size: 15px;
     color: var(--text-color);
     background-color: var(--bg-color);
     line-height: 1.6;
 }
 
-/* 布局网格 */
+/* --- 通用交互 (重点修改) --- */
+a {
+    text-decoration: underline; /* 默认显示下划线 */
+    text-decoration-thickness: 1px; /* 下划线细一点 */
+    text-underline-offset: 2px; /* 下划线离文字远一点，更好看 */
+    color: inherit;
+    transition: all 0.2s;
+}
+
+a:hover {
+    color: #fff;
+    background-color: #000; /* 经典的黑底白字悬停效果 */
+    text-decoration: none; /* 悬停时去掉下划线 */
+}
+
+/* --- 代码块样式 (重点修改) --- */
+
+/* 行内代码 (例如 `print("hello")`) */
+code {
+    font-family: "Menlo", "Consolas", monospace;
+    font-size: 0.9em;
+    background-color: #f7f7f7;
+    padding: 2px 4px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color); /* 加上细边框 */
+}
+
+/* 大段代码块 */
+pre {
+    font-family: "Menlo", "Consolas", monospace;
+    font-size: 0.9em;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto; /* 超出滚动 */
+    border: 1px solid var(--border-color); /* 加上细边框 */
+    margin: 20px 0;
+}
+
+/* pre 里面的 code 就不需要再加边框和背景了，避免重叠 */
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+/* --- 顶部大标题 --- */
+.site-header {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px 40px 40px;
+}
+.site-title {
+    font-family: var(--font-serif);
+    font-size: 4em;
+    font-weight: bold;
+    color: #000;
+    line-height: 1;
+    letter-spacing: -1px;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none; /* 大标题不需要下划线 */
+}
+.site-subtitle { font-family: var(--font-sans); color: var(--gray-color); font-size: 1em; }
+
+/* --- 三栏布局 --- */
 .container {
     display: grid;
-    grid-template-columns: 200px 1fr 260px;
+    grid-template-columns: 240px 1fr 280px;
     gap: 60px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 60px 40px;
-    min-height: 100vh;
+    padding: 0 40px 80px 40px;
+    align-items: start;
 }
-
-/* 响应式 */
-@media (max-width: 900px) {
-    .container { grid-template-columns: 1fr; gap: 40px; }
-    .sidebar-left, .sidebar-right { position: static !important; border: none; padding: 0; }
-    .sidebar-right { margin-top: 40px; border-top: 1px dashed #ccc; padding-top: 40px;}
-}
-
-/* 左栏 */
-.sidebar-left {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    position: sticky;
-    top: 60px;
-    height: fit-content;
-}
-.brand {
-    font-weight: bold;
-    font-size: 1.4em;
-    display: block;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-}
-.nav-menu { list-style: none; padding: 0; }
-.nav-menu li { margin-bottom: 12px; }
-
-/* 右栏 */
-.sidebar-right {
-    font-family: var(--font-mono);
-    font-size: 0.8em;
-    position: sticky;
-    top: 60px;
-    height: fit-content;
-    border-left: 1px solid #e0e0e0;
-    padding-left: 25px;
-}
-.widget-title {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-/* 首页索引样式 */
-.year-header {
-    font-family: var(--font-mono);
+.col-header {
+    font-family: var(--font-serif);
     font-size: 2em;
     font-weight: bold;
-    margin: 40px 0 20px 0;
-    opacity: 0.2;
-}
-.entry-item {
-    display: flex;
-    align-items: baseline;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed #e0e0e0;
-    transition: transform 0.2s;
-}
-.entry-item:hover { transform: translateX(5px); }
-.entry-date {
-    font-family: var(--font-mono);
-    color: #999;
-    font-size: 0.85em;
-    width: 100px;
-    flex-shrink: 0;
-}
-.entry-title {
-    font-family: var(--font-serif);
-    font-size: 1.3em;
-    flex-grow: 1;
-}
-.entry-tags {
-    font-family: var(--font-mono);
-    font-size: 0.75em;
-    color: #aaa;
-    margin-left: 15px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #000;
 }
 
-/* 文章详情页样式 (点击进入文章后) */
-.post-content h2 { margin-top: 1.5em; }
-.post-content code { background: #eee; padding: 2px 4px; font-family: var(--font-mono); font-size: 0.9em;}
-.post-content pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: var(--font-mono); }
-.post-content img { max-width: 100%; border: 1px solid #ddd; }
-
-/* 通用 */
-a { color: #000; text-decoration: none; transition: 0.1s; }
-a:hover { background-color: #000; color: #fff; }
-
-
-/* --- 修复换行问题的核心代码 --- */
-
-/* 1. 强制 Grid 子元素收缩 */
-main {
-    min-width: 0; /* 关键：允许网格区域比内容更小，从而触发换行 */
-    overflow-wrap: break-word; /* 强制长单词（如URL）换行 */
-    word-wrap: break-word; /* 兼容旧浏览器 */
-}
-
-/* 2. 限制图片最大宽度 */
-img {
-    max-width: 100%; /* 防止大图撑破布局 */
-    height: auto;
-}
-
+/* --- 侧边栏链接特殊处理 --- */
+/* 如果你不希望侧边栏的链接默认有下划线，可以解开下面的注释 */
 /*
-/* 3. 代码块单独处理 */
-/* 我们希望代码块内部滚动，而不是让整篇文章滚动 */
-pre {
-    max-width: 100%; /* 限制代码块宽度不超过父容器 */
-    overflow-x: auto; /* 超出部分显示内部滚动条 */
-    white-space: pre; /* 保持代码格式 */
+.sidebar-left a, .sidebar-right a {
+    text-decoration: none;
 }
+.sidebar-left a:hover, .sidebar-right a:hover {
+    text-decoration: underline;
+    background-color: transparent;
+    color: #000;
+}
+*/
+
+/* --- 其他模块 --- */
+.sidebar-left { position: sticky; top: 40px; }
+.bio-text { font-size: 0.95em; color: #333; margin-bottom: 20px; }
+.bio-links li { list-style: none; margin-bottom: 8px; }
+
+.post-item { margin-bottom: 40px; }
+.post-title {
+    font-family: var(--font-sans);
+    font-weight: bold;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+    text-decoration: none; /* 文章标题列表默认不加下划线比较干净 */
+}
+.post-title:hover { text-decoration: underline; background: none; color: #000; } /* 悬停加下划线 */
+
+.post-meta { font-size: 0.85em; color: #999; margin-bottom: 8px; display: block; }
+.post-excerpt { font-size: 0.95em; color: #444; line-height: 1.5; }
+
+.sidebar-right { position: sticky; top: 40px; }
+.project-item { margin-bottom: 30px; }
+.project-title { font-family: var(--font-sans); font-weight: bold; display: block; margin-bottom: 5px; }
+.project-desc { font-size: 0.9em; color: #555; }
+
+/* 响应式与修复 */
+@media (max-width: 1000px) {
+    .container { grid-template-columns: 1fr; gap: 50px; }
+    .sidebar-left, .sidebar-right { position: static; }
+    .site-title { font-size: 3em; }
+}
+main { min-width: 0; word-wrap: break-word; }
+img { max-width: 100%; }
