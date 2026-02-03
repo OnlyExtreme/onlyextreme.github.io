@@ -1,86 +1,15 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+title: "The Archive"
+description: "Physics, Code, Life, and Photography."
+url: "https://onlyextreme.github.io" # 替换成你的
+baseurl: "" 
 
-title: OnlyExtreme's Blog
-longtitle: OnlyExtreme's Blog
-email: 3200767839@qq.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: https://onlyextreme.github.io # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  OnlyExtreme
-domain: onlyextreme.github.io
+# 核心设置
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
 
-toc:
-  enabled: false
-  h_min: 1
-  h_max: 3
-
-
-markdown:         kramdown
+# 启用数学公式支持
 kramdown:
-  auto_ids:               true
-  input:                  GFM
-  math_engine:            mathjax
-  smart_quotes:           lsquo,rsquo,ldquo,rdquo
-  toc_levels:             1..6
-  syntax_highlighter:     github
-  syntax_highlighter_opts:
-    guess_lang:           true
+  math_engine: mathjax
 
-markdown_ext:             markdown,mkdown,mkdn,mkd,md
-permalink:                /:categories/:year-:month-:day-:title:output_ext
-
-collections:
-  pages:
-    output: true
-    permalink: /:collection/:path/
-
-
-# Build settings
-# theme: minima
-remote_theme: sighingnow/jekyll-gitbook
-plugins:
-  - jekyll-feed
-  - jekyll-readme-index
-  - jemoji
-syntax_highlighter_style: github
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# 排除不需要的文件
+exclude: [README.md, Gemfile, Gemfile.lock]

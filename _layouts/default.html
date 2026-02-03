@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <aside class="sidebar-left">
+        <a href="{{ '/' | relative_url }}" class="brand">{{ site.title }}</a>
+        <ul class="nav-menu">
+            <li><a href="{{ '/' | relative_url }}">Index / All</a></li>
+            <li><a href="#">Physics</a></li>
+            <li><a href="#">Photography</a></li>
+            <li><a href="#">Code</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div style="margin-top: 40px; font-size: 0.85em; color: #666;">
+            <p>19yo Student<br>Physics @ NUS</p>
+        </div>
+    </aside>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <aside class="sidebar-right">
+        <span class="widget-title">Linklog</span>
+        {% for link in site.data.links %}
+        <div style="margin-bottom: 20px; line-height: 1.4;">
+            <a href="{{ link.url }}" style="text-decoration: underline;">{{ link.title }}</a>
+            <span style="color: #888; display: block; font-size: 0.8em;">{{ link.domain }}</span>
+        </div>
+        {% endfor %}
+
+        <br>
+        <span class="widget-title">Status</span>
+        <div style="font-size: 0.9em; color: #666;">
+            Online<br>Singapore
+        </div>
+    </aside>
+
+</div>
+
+</body>
+</html>
