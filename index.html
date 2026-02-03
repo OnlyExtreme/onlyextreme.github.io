@@ -3,21 +3,53 @@ layout: default
 title: Home
 ---
 
-<h2 class="col-header">Writings</h2>
+<div class="home-container">
 
-{% for post in site.posts %}
-<div class="post-item">
-    <a href="{{ post.url | relative_url }}" class="post-title">
-        {{ post.title }}
-    </a>
-    
-    <span class="post-meta">
-        {{ post.date | date: "%Y-%m-%d" }}
-        {% if post.tags.size > 0 %} | {{ post.tags | join: ', ' }} {% endif %}
-    </span>
+    <aside class="sidebar-left">
+        <h2 class="col-header">About</h2>
+        <div class="bio-text" style="color: #444; margin-bottom: 30px;">
+            <p>Physics @ NUS.</p>
+            <p>Exploring analog life in a digital world.</p>
+        </div>
+        <ul style="padding:0; list-style:none; line-height:2;">
+            <li><a href="#" style="text-decoration:underline;">Github</a></li>
+            <li><a href="#" style="text-decoration:underline;">Email</a></li>
+            <li><a href="#" style="text-decoration:underline;">RSS</a></li>
+        </ul>
+    </aside>
 
-    <div class="post-excerpt">
-        {{ post.excerpt | strip_html | truncate: 80 }}
-    </div>
+    <main>
+        <h2 class="col-header">Writings</h2>
+        
+        {% for post in site.posts %}
+        <div class="post-item">
+            <a href="{{ post.url | relative_url }}" class="post-title">
+                {{ post.title }}
+            </a>
+            <span class="post-meta">
+                {{ post.date | date: "%Y-%m-%d" }}
+            </span>
+            </div>
+        {% endfor %}
+    </main>
+
+    <aside class="sidebar-right">
+        <h2 class="col-header">Projects</h2>
+        
+        <div style="margin-bottom:40px;">
+            <a href="#" style="font-weight:bold; display:block;">The Archive</a>
+            <small style="color:#888;">Blog & Knowledge Base</small>
+        </div>
+
+        <div style="margin-bottom:40px;">
+            <a href="#" style="font-weight:bold; display:block;">Singapore Impression</a>
+            <small style="color:#888;">Photography Collection</small>
+        </div>
+
+        <div style="margin-bottom:40px;">
+            <a href="#" style="font-weight:bold; display:block;">Cassette UI</a>
+            <small style="color:#888;">Music Tool Interface</small>
+        </div>
+    </aside>
+
 </div>
-{% endfor %}

@@ -1,152 +1,123 @@
-/* assets/css/style.css */
-
 :root {
     --font-serif: "Georgia", "Times New Roman", "Songti SC", serif;
     --font-sans: "Inter", "Helvetica Neue", "Arial", "PingFang SC", sans-serif;
     --bg-color: #ffffff;
     --text-color: #111;
-    --gray-color: #666;
-    /* 定义一个边框颜色变量，方便统一修改 */
-    --border-color: #e0e0e0; 
+    --gray-color: #888;
+    --border-color: #f0f0f0; /* 更淡的分割线颜色 */
 }
 
 body {
     margin: 0;
     padding: 0;
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-color);
     background-color: var(--bg-color);
-    line-height: 1.6;
-}
-
-/* --- 通用交互 (重点修改) --- */
-a {
-    text-decoration: underline; /* 默认显示下划线 */
-    text-decoration-thickness: 1px; /* 下划线细一点 */
-    text-underline-offset: 2px; /* 下划线离文字远一点，更好看 */
-    color: inherit;
-    transition: all 0.2s;
-}
-
-a:hover {
-    color: #fff;
-    background-color: #000; /* 经典的黑底白字悬停效果 */
-    text-decoration: none; /* 悬停时去掉下划线 */
-}
-
-/* --- 代码块样式 (重点修改) --- */
-
-/* 行内代码 (例如 `print("hello")`) */
-code {
-    font-family: "Menlo", "Consolas", monospace;
-    font-size: 0.9em;
-    background-color: #f7f7f7;
-    padding: 2px 4px;
-    border-radius: 3px;
-    border: 1px solid var(--border-color); /* 加上细边框 */
-}
-
-/* 大段代码块 */
-pre {
-    font-family: "Menlo", "Consolas", monospace;
-    font-size: 0.9em;
-    background-color: #f7f7f7;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto; /* 超出滚动 */
-    border: 1px solid var(--border-color); /* 加上细边框 */
-    margin: 20px 0;
-}
-
-/* pre 里面的 code 就不需要再加边框和背景了，避免重叠 */
-pre code {
-    background-color: transparent;
-    padding: 0;
-    border: none;
+    line-height: 1.8; /* 3. 行间距更宽松 */
+    letter-spacing: 0.02em; /* 3. 字间距稍微增加 */
 }
 
 /* --- 顶部大标题 --- */
 .site-header {
-    max-width: 1400px;
+    max-width: 1600px; /* 稍微放宽 */
     margin: 0 auto;
-    padding: 60px 40px 40px 40px;
+    padding: 80px 60px 40px 60px; /* 5. 顶部边距增大 */
+    text-align: left;
 }
 .site-title {
     font-family: var(--font-serif);
-    font-size: 4em;
+    font-size: 4.5em; /* 标题更大 */
     font-weight: bold;
     color: #000;
     line-height: 1;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
     display: block;
-    margin-bottom: 10px;
-    text-decoration: none; /* 大标题不需要下划线 */
-}
-.site-subtitle { font-family: var(--font-sans); color: var(--gray-color); font-size: 1em; }
-
-/* --- 三栏布局 --- */
-.container {
-    display: grid;
-    grid-template-columns: 240px 1fr 280px;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px 80px 40px;
-    align-items: start;
-}
-.col-header {
-    font-family: var(--font-serif);
-    font-size: 2em;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 30px;
-    color: #000;
-}
-
-/* --- 侧边栏链接特殊处理 --- */
-/* 如果你不希望侧边栏的链接默认有下划线，可以解开下面的注释 */
-/*
-.sidebar-left a, .sidebar-right a {
+    margin-bottom: 15px;
     text-decoration: none;
 }
-.sidebar-left a:hover, .sidebar-right a:hover {
-    text-decoration: underline;
-    background-color: transparent;
+.site-subtitle { 
+    font-family: var(--font-sans); 
+    color: var(--gray-color); 
+    font-size: 1.1em; 
+    margin-left: 5px;
+}
+
+/* --- 首页三栏布局 (Grid) --- */
+/* 这里的 padding: 0 60px 就是调整“两侧离最边缘距离”的地方 */
+.home-container {
+    display: grid;
+    /* 5. 调整栏宽比例，中间稍微宽一点，两侧留出空间 */
+    grid-template-columns: 260px 1fr 300px; 
+    gap: 80px; /* 5. 元素之间间距变大 (原60px) */
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 40px 80px 120px 80px; /* 5. 两侧留白增大 (原40px) */
+    align-items: start;
+}
+
+/* --- 4. 竖分割线 --- */
+/* 给左栏加右边框，给右栏加左边框，形成三栏视觉分割 */
+.sidebar-left {
+    position: sticky;
+    top: 60px;
+    border-right: 1px solid var(--border-color); /* 分割线 */
+    padding-right: 40px; /* 给分割线留出呼吸空间 */
+}
+
+.sidebar-right {
+    position: sticky;
+    top: 60px;
+    border-left: 1px solid var(--border-color); /* 分割线 */
+    padding-left: 40px; /* 给分割线留出呼吸空间 */
+}
+
+/* --- 栏目内容样式 --- */
+.col-header {
+    font-family: var(--font-serif);
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 40px; /* 标题和内容离得更远 */
     color: #000;
 }
-*/
 
-/* --- 其他模块 --- */
-.sidebar-left { position: sticky; top: 40px; }
-.bio-text { font-size: 0.95em; color: #333; margin-bottom: 20px; }
-.bio-links li { list-style: none; margin-bottom: 8px; }
-
-.post-item { margin-bottom: 40px; }
+.post-item { margin-bottom: 30px; }
 .post-title {
     font-family: var(--font-sans);
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: block;
-    margin-bottom: 5px;
-    color: #000;
-    text-decoration: none; /* 文章标题列表默认不加下划线比较干净 */
+    margin-bottom: 8px;
+    text-decoration: none;
+    line-height: 1.4;
 }
-.post-title:hover { text-decoration: underline; background: none; color: #000; } /* 悬停加下划线 */
+.post-title:hover { text-decoration: underline; background: none; }
+.post-meta { font-size: 0.9em; color: #bbb; display: block; }
 
-.post-meta { font-size: 0.85em; color: #999; margin-bottom: 8px; display: block; }
-.post-excerpt { font-size: 0.95em; color: #444; line-height: 1.5; }
+/* --- 2. 文章阅读页 (单栏布局) --- */
+.post-layout-container {
+    max-width: 720px; /* 限制阅读宽度，模拟纸质书 */
+    margin: 0 auto;
+    padding: 40px 20px 120px 20px;
+}
 
-.sidebar-right { position: sticky; top: 40px; }
-.project-item { margin-bottom: 30px; }
-.project-title { font-family: var(--font-sans); font-weight: bold; display: block; margin-bottom: 5px; }
-.project-desc { font-size: 0.9em; color: #555; }
+.post-content {
+    font-family: var(--font-serif); /* 正文用衬线体，更有沉浸感 */
+    font-size: 1.1em;
+    line-height: 1.9; /* 阅读时的行高 */
+}
+.post-content h2 { margin-top: 2em; margin-bottom: 1em; font-weight: bold; font-family: var(--font-sans);}
+.post-content p { margin-bottom: 1.5em; text-align: justify; }
 
-/* 响应式与修复 */
-@media (max-width: 1000px) {
-    .container { grid-template-columns: 1fr; gap: 50px; }
-    .sidebar-left, .sidebar-right { position: static; }
+/* 响应式 */
+@media (max-width: 1100px) {
+    .home-container { grid-template-columns: 1fr; gap: 60px; }
+    .sidebar-left, .sidebar-right { 
+        position: static; 
+        border: none; /* 手机端去掉分割线 */
+        padding: 0; 
+    }
     .site-title { font-size: 3em; }
+    .container, .site-header { padding-left: 30px; padding-right: 30px; }
 }
-main { min-width: 0; word-wrap: break-word; }
-img { max-width: 100%; }

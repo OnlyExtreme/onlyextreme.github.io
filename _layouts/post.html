@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<article class="post-layout-container">
+    
+    <header style="margin-bottom: 60px; text-align: center;">
+        <h1 style="font-family: var(--font-serif); font-size: 2.5em; margin-bottom: 10px;">{{ page.title }}</h1>
+        <div style="color: #999; font-family: var(--font-sans);">
+            {{ page.date | date: "%B %d, %Y" }} 
+            {% if page.tags %} · {{ page.tags | join: ', ' }} {% endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+    <hr style="margin: 80px 0 40px 0; border: 0; border-top: 1px solid #eee;">
+    <div style="text-align: center;">
+        <a href="{{ '/' | relative_url }}" style="font-family: var(--font-sans); font-weight: bold;">← Back to Index</a>
+    </div>
+
+</article>

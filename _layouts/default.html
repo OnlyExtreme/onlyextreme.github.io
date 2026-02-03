@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} | {{ site.title }}</title>
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    
     <script>
     MathJax = {
       tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
@@ -21,45 +20,7 @@
         <div class="site-subtitle">{{ site.description }}</div>
     </header>
 
-    <div class="container">
-        
-        <aside class="sidebar-left">
-            <h2 class="col-header">About</h2>
-            <div class="bio-text">
-                <p>我是 NUS 物理系的大二学生 (19岁)。</p>
-                <p>正在探索数码时代之前的“模拟生活方式”。喜欢纸质书、手动镜头和胶片感。</p>
-            </div>
-            <ul class="bio-links" style="padding:0;">
-                <li><a href="#">Github</a></li>
-                <li><a href="#">Email</a></li>
-                <li><a href="#">RSS</a></li>
-            </ul>
-        </aside>
-
-        <main>
-            {{ content }}
-        </main>
-
-        <aside class="sidebar-right">
-            <h2 class="col-header">Projects</h2>
-            
-            <div class="project-item">
-                <a href="#" class="project-title">The Archive</a>
-                <div class="project-desc">我的个人博客与知识库，基于 Jekyll 构建。</div>
-            </div>
-
-            <div class="project-item">
-                <a href="#" class="project-title">Singapore Impression</a>
-                <div class="project-desc">摄影集企划：记录绿意盎然的城市肌理。</div>
-            </div>
-            
-            <div class="project-item">
-                <a href="#" class="project-title">Cassette Futurism UI</a>
-                <div class="project-desc">复古未来主义风格的音乐管理工具。</div>
-            </div>
-        </aside>
-
-    </div>
+    {{ content }}
 
 </body>
 </html>
