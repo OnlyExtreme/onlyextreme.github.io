@@ -171,8 +171,8 @@ a.post-title:hover {
 }
 
 .post-content {
-    font-family: var(--font-serif);
-    font-size: 1.1em;
+    font-family: var(--font-sans);
+    font-size: 1.0em;
     line-height: 1.9;
 }
 .post-content h2 { margin-top: 2em; margin-bottom: 1em; font-family: var(--font-sans); font-size: 1.5em;}
@@ -211,11 +211,11 @@ p code, li code {
 /* 2. 大段代码块 (Code Blocks) - 比如 ```python ... ``` */
 pre {
     font-family: "CodeNewRoman", "Menlo", "Consolas", "Monaco", monospace;
-    font-size: 0.9em;               /* 字号 */
+    font-size: 0.85em;               /* 字号 */
     line-height: 1.5;               /* 行高 */
     
     background: #f9f9f9;            /* 背景色：整块代码的背景 */
-    color: #333;                    /* 代码文字颜色 */
+    /*color: #333;                    /* 代码文字颜色 */
     
     padding: 20px;                  /* 内边距：文字离边框的距离 */
     border: 1px solid #eee;         /* 边框颜色 */
