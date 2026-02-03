@@ -7,14 +7,16 @@ title: Home
 
     <aside class="sidebar-left">
         <h2 class="col-header">About</h2>
-        <div class="bio-text" style="color: #444; margin-bottom: 30px;">
-            <p style="font-size: 1.1em;">Physics @ NUS.</p>
-            <p style="font-size: 1.1em;">Exploring analog life in a digital world.</p>
+        
+        <div class="bio-intro">
+            <p>Physics @ NUS.</p>
+            <p>Exploring analog life in a digital world.</p>
         </div>
-        <ul style="padding:0; list-style:none; line-height:1.4;">
-            <li style="font-size: 1.1em;"><a href="#" style="text-decoration:underline;">Github</a></li>
-            <li style="font-size: 1.1em;"><a href="#" style="text-decoration:underline;">Email</a></li>
-            <li style="font-size: 1.1em;"><a href="#" style="text-decoration:underline;">RSS</a></li>
+        
+        <ul class="bio-links">
+            <li><a href="#">Github</a></li>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">RSS</a></li>
         </ul>
     </aside>
 
@@ -29,26 +31,26 @@ title: Home
             <span class="post-meta">
                 {{ post.date | date: "%Y-%m-%d" }}
             </span>
-            </div>
+        </div>
         {% endfor %}
     </main>
 
     <aside class="sidebar-right">
-        <h2 class="col-header">Projects</h2>
+        <h2 class="col-header">Link Collections</h2>
         
-        <div style="margin-bottom:20px;">
-            <a href="#" style="font-weight:bold; display:block;">The Archive</a>
-            <small style="color:#888;">Blog & Knowledge Base</small>
+        <div class="collection-item">
+            <a href="#" class="collection-title">The Archive</a>
+            <small class="collection-desc">Blog & Knowledge Base</small>
         </div>
 
-        <div style="margin-bottom:20px;">
-            <a href="#" style="font-weight:bold; display:block;">Singapore Impression</a>
-            <small style="color:#888;">Photography Collection</small>
+        <div class="collection-item">
+            <a href="#" class="collection-title">Singapore Impression</a>
+            <small class="collection-desc">Photography Collection</small>
         </div>
 
-        <div style="margin-bottom:20px;">
-            <a href="#" style="font-weight:bold; display:block;">Cassette UI</a>
-            <small style="color:#888;">Music Tool Interface</small>
+        <div class="collection-item">
+            <a href="#" class="collection-title">Cassette UI</a>
+            <small class="collection-desc">Music Tool Interface</small>
         </div>
     </aside>
 

@@ -1,4 +1,5 @@
 :root {
+    /* 加入了 EB Garamond */
     --font-serif: "EB Garamond", "Georgia", "Times New Roman", "Songti SC", serif;
     --font-sans: "Inter", "Helvetica Neue", "Arial", "PingFang SC", sans-serif;
     --bg-color: #ffffff;
@@ -16,20 +17,19 @@ body {
     background-color: var(--bg-color);
     line-height: 1.8;
     letter-spacing: 0.02em;
-    /* 防止整个页面横向滚动 */
     overflow-x: hidden; 
 }
 
-/* --- 1. 顶部大标题 (修复：字号调小) --- */
+/* --- 1. 顶部大标题 --- */
 .site-header {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 60px 80px 20px 80px; /* 顶部间距稍微收一点 */
+    padding: 60px 80px 20px 80px;
     text-align: left;
 }
 .site-title {
     font-family: var(--font-serif);
-    font-size: 2.2em; /* 【改动】从 4.5em 减小到 2.2em */
+    font-size: 2.2em;
     font-weight: bold;
     color: #000;
     line-height: 1.2;
@@ -45,28 +45,24 @@ body {
     margin-left: 2px;
 }
 
-/* --- 2. 链接颜色 (修复：强制黑色，去蓝紫色) --- */
+/* --- 2. 链接颜色 --- */
 a {
-    color: #000; /* 【改动】强制黑色 */
+    color: #000;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     transition: all 0.2s;
 }
-/* 覆盖浏览器默认的“已访问链接”颜色 */
-a:visited {
-    color: #000; 
-}
+a:visited { color: #000; }
 a:hover {
     color: #fff;
     background-color: #000;
     text-decoration: none;
 }
 
-/* --- 3. 首页三栏布局 (修复：范围溢出问题) --- */
+/* --- 3. 首页三栏布局 --- */
 .home-container {
     display: grid;
-    /* 调整栏宽：左侧导航窄一点，中间内容宽一点 */
     grid-template-columns: 220px 1fr 280px; 
     gap: 80px;
     max-width: 1600px;
@@ -75,11 +71,10 @@ a:hover {
     align-items: start;
 }
 
-/* 【关键修复】：防止 Grid 子元素撑破页面 */
 .home-container > main {
-    min-width: 0; /* 允许 flex/grid 子项收缩 */
-    width: 100%;  /* 限制宽度 */
-    overflow-wrap: break-word; /* 强制长单词换行 */
+    min-width: 0;
+    width: 100%; 
+    overflow-wrap: break-word;
 }
 
 /* --- 分割线与侧边栏 --- */
@@ -88,6 +83,8 @@ a:hover {
     top: 60px;
     border-right: 1px solid var(--border-color);
     padding-right: 40px;
+    /* 左侧栏整体字体稍微改小一点点 */
+    font-size: 0.9em; 
 }
 
 .sidebar-right {
@@ -95,33 +92,70 @@ a:hover {
     top: 60px;
     border-left: 1px solid var(--border-color);
     padding-left: 40px;
+    /* 右侧栏整体字体稍微改小一点点 */
+    font-size: 0.9em;
 }
+
+/* --- 左侧栏专用样式 (移除了HTML内联样式) --- */
+.bio-intro {
+    color: #444; 
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.bio-links {
+    padding: 0;
+    list-style: none;
+    line-height: 1.6;
+}
+.bio-links li a {
+    text-decoration: underline;
+}
+
+/* --- 右侧栏专用样式 (Link Collections) --- */
+.collection-item {
+    margin-bottom: 20px;
+}
+.collection-title {
+    font-weight: bold;
+    display: block;
+    text-decoration: none; /* 标题默认不加下划线更干净 */
+}
+.collection-title:hover {
+    text-decoration: underline;
+    background: none; /* 侧边栏保持简洁，不一定非要黑底 */
+}
+.collection-desc {
+    color: #888;
+    font-size: 0.9em; /* 比侧边栏默认字体再小一点 */
+    margin-top: 4px;
+    display: block;
+}
+
 
 /* --- 栏目内容样式 --- */
 .col-header {
     font-family: var(--font-serif);
-    font-size: 1.5em; /* 栏目标题也稍微调小一点，保持比例 */
+    font-size: 1.5em; 
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 25px; /* 稍微增加一点间距 */
     color: #000;
 }
 
 .post-item { margin-bottom: 20px; }
 
-/* 链接标题样式特殊处理 */
 a.post-title {
     font-family: var(--font-sans);
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.1em; /* 这里的字号恢复到正常，不受sidebar缩小影响 */
     display: block;
     margin-bottom: 4px;
-    text-decoration: none; /* 列表标题默认无下划线 */
+    text-decoration: none;
     color: #000;
 }
 a.post-title:hover {
     text-decoration: underline;
-    background: none; /* 标题悬停不加黑底，保持清爽 */
+    background: none;
     color: #000;
 }
 .post-meta { font-size: 0.9em; color: #999; display: block; }
@@ -131,7 +165,6 @@ a.post-title:hover {
     max-width: 720px;
     margin: 0 auto;
     padding: 20px 20px 120px 20px;
-    /* 同样防止内容溢出 */
     overflow-wrap: break-word; 
     min-width: 0;
 }
@@ -144,17 +177,17 @@ a.post-title:hover {
 .post-content h2 { margin-top: 2em; margin-bottom: 1em; font-family: var(--font-sans); font-size: 1.5em;}
 .post-content p { margin-bottom: 1.5em; text-align: justify; }
 
-/* --- 元素防溢出 (图片、代码块) --- */
+/* --- 元素防溢出 --- */
 img {
     max-width: 100%;
     height: auto;
-    display: block; /* 防止图片底部留白 */
-    border: 1px solid #f0f0f0; /* 给图片加个极淡的边框 */
+    display: block; 
+    border: 1px solid #f0f0f0;
 }
 
 pre {
     max-width: 100%;
-    overflow-x: auto; /* 代码太长自动出现内部滚动条，而不是撑大页面 */
+    overflow-x: auto;
     background: #f9f9f9;
     padding: 15px;
     border: 1px solid #eee;
@@ -167,8 +200,8 @@ pre {
         position: static; 
         border: none; 
         padding: 0; 
-        margin-bottom: 40px; /* 手机端各板块上下间距 */
+        margin-bottom: 40px; 
+        font-size: 1em; /* 手机端恢复正常字号，方便阅读 */
     }
     .site-header, .home-container { padding-left: 30px; padding-right: 30px; }
-    /* 手机端隐藏右侧栏的分割线，或者不需要特殊处理，因为 border:none 已经去掉了 */
 }
