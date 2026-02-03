@@ -1,5 +1,5 @@
 :root {
-    --font-serif: "Georgia", "Times New Roman", "Songti SC", serif;
+    --font-serif: "EB Garamond", "Georgia", "Times New Roman", "Songti SC", serif;
     --font-sans: "Inter", "Helvetica Neue", "Arial", "PingFang SC", sans-serif;
     --bg-color: #ffffff;
     --text-color: #111;
@@ -107,7 +107,7 @@ a:hover {
     color: #000;
 }
 
-.post-item { margin-bottom: 30px; }
+.post-item { margin-bottom: 20px; }
 
 /* 链接标题样式特殊处理 */
 a.post-title {
@@ -115,7 +115,7 @@ a.post-title {
     font-weight: bold;
     font-size: 1.1em;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     text-decoration: none; /* 列表标题默认无下划线 */
     color: #000;
 }
