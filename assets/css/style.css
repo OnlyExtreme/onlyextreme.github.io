@@ -123,6 +123,7 @@ a:hover {
 .collection-title:hover {
     text-decoration: underline;
     background: none; /* 侧边栏保持简洁，不一定非要黑底 */
+    color: #000;
 }
 .collection-desc {
     color: #888;
@@ -191,6 +192,50 @@ pre {
     background: #f9f9f9;
     padding: 15px;
     border: 1px solid #eee;
+}
+/* =========================================
+   代码样式控制区 (Code Styling)
+   ========================================= */
+
+/* 1. 行内代码 (Inline Code) - 比如文章里的 `print()` */
+p code, li code {
+    font-family: "CodeNewRoman", "Menlo", "Consolas", "Monaco", monospace; /* 字体 */
+    font-size: 0.85em;              /* 字号：通常比正文小一点更精致 */
+    background-color: #f4f4f4;      /* 背景色：浅灰 */
+    color: #d14;                    /* 文字颜色：比如设为深红 (Jekyll默认风格) 或者 #333 */
+    padding: 2px 5px;               /* 内边距：让背景稍微宽一点 */
+    border-radius: 3px;             /* 圆角 */
+    border: 1px solid #eee;         /* 细边框 */
+}
+
+/* 2. 大段代码块 (Code Blocks) - 比如 ```python ... ``` */
+pre {
+    font-family: "CodeNewRoman", "Menlo", "Consolas", "Monaco", monospace;
+    font-size: 0.9em;               /* 字号 */
+    line-height: 1.5;               /* 行高 */
+    
+    background: #f9f9f9;            /* 背景色：整块代码的背景 */
+    color: #333;                    /* 代码文字颜色 */
+    
+    padding: 20px;                  /* 内边距：文字离边框的距离 */
+    border: 1px solid #eee;         /* 边框颜色 */
+    border-radius: 5px;             /* 边框圆角 */
+    
+    margin: 30px 0;                 /* 上下外边距：代码块与正文的距离 */
+    
+    /* 必须保留：防止代码撑破页面 */
+    max-width: 100%;
+    overflow-x: auto;               /* 超出显示横向滚动条 */
+    white-space: pre;               
+}
+
+/* 3. (可选) 代码高亮颜色微调 */
+/* 如果你觉得 Jekyll 默认的高亮颜色太刺眼，可以在这里统一调整 */
+pre code {
+    border: none;           /* 去掉 pre 内部 code 的边框，避免双重边框 */
+    background: transparent;/* 去掉 pre 内部 code 的背景 */
+    padding: 0;
+    color: inherit;
 }
 
 /* --- 响应式 --- */
