@@ -4,7 +4,7 @@
     --bg-color: #ffffff;
     --text-color: #111;
     --gray-color: #888;
-    --border-color: #f0f0f0; /* 更淡的分割线颜色 */
+    --border-color: #f0f0f0; 
 }
 
 body {
@@ -14,110 +14,161 @@ body {
     font-size: 16px;
     color: var(--text-color);
     background-color: var(--bg-color);
-    line-height: 1.8; /* 3. 行间距更宽松 */
-    letter-spacing: 0.02em; /* 3. 字间距稍微增加 */
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    /* 防止整个页面横向滚动 */
+    overflow-x: hidden; 
 }
 
-/* --- 顶部大标题 --- */
+/* --- 1. 顶部大标题 (修复：字号调小) --- */
 .site-header {
-    max-width: 1600px; /* 稍微放宽 */
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 80px 60px 40px 60px; /* 5. 顶部边距增大 */
+    padding: 60px 80px 20px 80px; /* 顶部间距稍微收一点 */
     text-align: left;
 }
 .site-title {
     font-family: var(--font-serif);
-    font-size: 4.5em; /* 标题更大 */
+    font-size: 2.2em; /* 【改动】从 4.5em 减小到 2.2em */
     font-weight: bold;
     color: #000;
-    line-height: 1;
-    letter-spacing: -1.5px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-decoration: none;
 }
 .site-subtitle { 
     font-family: var(--font-sans); 
     color: var(--gray-color); 
-    font-size: 1.1em; 
-    margin-left: 5px;
+    font-size: 1em; 
+    margin-left: 2px;
 }
 
-/* --- 首页三栏布局 (Grid) --- */
-/* 这里的 padding: 0 60px 就是调整“两侧离最边缘距离”的地方 */
+/* --- 2. 链接颜色 (修复：强制黑色，去蓝紫色) --- */
+a {
+    color: #000; /* 【改动】强制黑色 */
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: all 0.2s;
+}
+/* 覆盖浏览器默认的“已访问链接”颜色 */
+a:visited {
+    color: #000; 
+}
+a:hover {
+    color: #fff;
+    background-color: #000;
+    text-decoration: none;
+}
+
+/* --- 3. 首页三栏布局 (修复：范围溢出问题) --- */
 .home-container {
     display: grid;
-    /* 5. 调整栏宽比例，中间稍微宽一点，两侧留出空间 */
-    grid-template-columns: 260px 1fr 300px; 
-    gap: 80px; /* 5. 元素之间间距变大 (原60px) */
+    /* 调整栏宽：左侧导航窄一点，中间内容宽一点 */
+    grid-template-columns: 220px 1fr 280px; 
+    gap: 80px;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 40px 80px 120px 80px; /* 5. 两侧留白增大 (原40px) */
+    padding: 40px 80px 120px 80px;
     align-items: start;
 }
 
-/* --- 4. 竖分割线 --- */
-/* 给左栏加右边框，给右栏加左边框，形成三栏视觉分割 */
+/* 【关键修复】：防止 Grid 子元素撑破页面 */
+.home-container > main {
+    min-width: 0; /* 允许 flex/grid 子项收缩 */
+    width: 100%;  /* 限制宽度 */
+    overflow-wrap: break-word; /* 强制长单词换行 */
+}
+
+/* --- 分割线与侧边栏 --- */
 .sidebar-left {
     position: sticky;
     top: 60px;
-    border-right: 1px solid var(--border-color); /* 分割线 */
-    padding-right: 40px; /* 给分割线留出呼吸空间 */
+    border-right: 1px solid var(--border-color);
+    padding-right: 40px;
 }
 
 .sidebar-right {
     position: sticky;
     top: 60px;
-    border-left: 1px solid var(--border-color); /* 分割线 */
-    padding-left: 40px; /* 给分割线留出呼吸空间 */
+    border-left: 1px solid var(--border-color);
+    padding-left: 40px;
 }
 
 /* --- 栏目内容样式 --- */
 .col-header {
     font-family: var(--font-serif);
-    font-size: 1.8em;
+    font-size: 1.5em; /* 栏目标题也稍微调小一点，保持比例 */
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 40px; /* 标题和内容离得更远 */
+    margin-bottom: 40px;
     color: #000;
 }
 
 .post-item { margin-bottom: 30px; }
-.post-title {
+
+/* 链接标题样式特殊处理 */
+a.post-title {
     font-family: var(--font-sans);
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.1em;
     display: block;
-    margin-bottom: 8px;
-    text-decoration: none;
-    line-height: 1.4;
+    margin-bottom: 6px;
+    text-decoration: none; /* 列表标题默认无下划线 */
+    color: #000;
 }
-.post-title:hover { text-decoration: underline; background: none; }
-.post-meta { font-size: 0.9em; color: #bbb; display: block; }
+a.post-title:hover {
+    text-decoration: underline;
+    background: none; /* 标题悬停不加黑底，保持清爽 */
+    color: #000;
+}
+.post-meta { font-size: 0.9em; color: #999; display: block; }
 
-/* --- 2. 文章阅读页 (单栏布局) --- */
+/* --- 文章阅读页 (单栏) --- */
 .post-layout-container {
-    max-width: 720px; /* 限制阅读宽度，模拟纸质书 */
+    max-width: 720px;
     margin: 0 auto;
-    padding: 40px 20px 120px 20px;
+    padding: 20px 20px 120px 20px;
+    /* 同样防止内容溢出 */
+    overflow-wrap: break-word; 
+    min-width: 0;
 }
 
 .post-content {
-    font-family: var(--font-serif); /* 正文用衬线体，更有沉浸感 */
+    font-family: var(--font-serif);
     font-size: 1.1em;
-    line-height: 1.9; /* 阅读时的行高 */
+    line-height: 1.9;
 }
-.post-content h2 { margin-top: 2em; margin-bottom: 1em; font-weight: bold; font-family: var(--font-sans);}
+.post-content h2 { margin-top: 2em; margin-bottom: 1em; font-family: var(--font-sans); font-size: 1.5em;}
 .post-content p { margin-bottom: 1.5em; text-align: justify; }
 
-/* 响应式 */
+/* --- 元素防溢出 (图片、代码块) --- */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* 防止图片底部留白 */
+    border: 1px solid #f0f0f0; /* 给图片加个极淡的边框 */
+}
+
+pre {
+    max-width: 100%;
+    overflow-x: auto; /* 代码太长自动出现内部滚动条，而不是撑大页面 */
+    background: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #eee;
+}
+
+/* --- 响应式 --- */
 @media (max-width: 1100px) {
     .home-container { grid-template-columns: 1fr; gap: 60px; }
     .sidebar-left, .sidebar-right { 
         position: static; 
-        border: none; /* 手机端去掉分割线 */
+        border: none; 
         padding: 0; 
+        margin-bottom: 40px; /* 手机端各板块上下间距 */
     }
-    .site-title { font-size: 3em; }
-    .container, .site-header { padding-left: 30px; padding-right: 30px; }
+    .site-header, .home-container { padding-left: 30px; padding-right: 30px; }
+    /* 手机端隐藏右侧栏的分割线，或者不需要特殊处理，因为 border:none 已经去掉了 */
 }
