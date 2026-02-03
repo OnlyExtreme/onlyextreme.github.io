@@ -6,6 +6,47 @@
     --text-color: #111;
     --gray-color: #888;
     --border-color: #f0f0f0; 
+
+    --link-color: #111111;
+    --link-hover-bg: #111111;
+    --link-hover-text: #ffffff;
+
+    --code-bg: #f9f9f9;
+    --code-border: #eee;
+
+
+}
+
+/* =========================================
+   Dark Mode (黑色模式适配)
+   ========================================= */
+
+/* 当用户的系统设置为深色模式时，覆盖以下变量 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #111111;       /* 背景变深黑 (不是纯黑，护眼) */
+        --text-color: #e0e0e0;     /* 文字变灰白 (避免纯白刺眼) */
+        --gray-color: #a0a0a0;     /* 辅助灰色变亮一点 */
+        --border-color: #333333;   /* 边框变深灰 */
+        
+        /* 新增：定义链接颜色变量，方便反转 */
+        --link-color: #ffffff;
+        --link-hover-bg: #ffffff;
+        --link-hover-text: #000000;
+        
+        /* 新增：代码块背景 */
+        --code-bg: #1c1c1c;
+        --code-border: #333;
+    }
+
+    /* 图片降低亮度，防止亮瞎眼 */
+    img {
+        opacity: 0.85;
+        transition: opacity 0.3s;
+    }
+    img:hover {
+        opacity: 1;
+    }
 }
 
 body {
@@ -31,7 +72,7 @@ body {
     font-family: var(--font-serif);
     font-size: 2.2em;
     font-weight: bold;
-    color: #000;
+    color: var(--text-color);
     line-height: 1.2;
     letter-spacing: -0.5px;
     display: block;
@@ -47,16 +88,16 @@ body {
 
 /* --- 2. 链接颜色 --- */
 a {
-    color: #000;
+    color: var(--link-color);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
     transition: all 0.2s;
 }
-a:visited { color: #000; }
+a:visited { color: var(--link-color); }
 a:hover {
-    color: #fff;
-    background-color: #000;
+    color: var(--link-hover-text);
+    background-color: var(--link-hover-bg);
     text-decoration: none;
 }
 
@@ -98,7 +139,7 @@ a:hover {
 
 /* --- 左侧栏专用样式 (移除了HTML内联样式) --- */
 .bio-intro {
-    color: #444; 
+    color: var(--gray-color); 
     margin-bottom: 30px;
     line-height: 1.6;
 }
@@ -123,10 +164,10 @@ a:hover {
 .collection-title:hover {
     text-decoration: underline;
     background: none; /* 侧边栏保持简洁，不一定非要黑底 */
-    color: #000;
+    color: var(--link-hover-text);
 }
 .collection-desc {
-    color: #888;
+    color: var(--gray-color);
     font-size: 0.9em; /* 比侧边栏默认字体再小一点 */
     margin-top: 4px;
     display: block;
@@ -140,7 +181,7 @@ a:hover {
     font-weight: bold;
     margin-top: 0;
     margin-bottom: 20px; /* 稍微增加一点间距 */
-    color: #000;
+    color: var(--text-color);
 }
 
 .post-item { margin-bottom: 20px; }
@@ -148,18 +189,18 @@ a:hover {
 a.post-title {
     font-family: var(--font-sans);
     font-weight: bold;
-    font-size: 1.1em; /* 这里的字号恢复到正常，不受sidebar缩小影响 */
+    font-size: 1.05em; /* 这里的字号恢复到正常，不受sidebar缩小影响 */
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 1.5px;
     text-decoration: none;
-    color: #000;
+    color: var(--text-color);
 }
 a.post-title:hover {
     text-decoration: underline;
     background: none;
-    color: #000;
+    color: var(--text-color);
 }
-.post-meta { font-size: 0.9em; color: #999; display: block; }
+.post-meta { font-size: 0.9em; color: var(--gray-color); display: block; }
 
 /* --- 文章阅读页 (单栏) --- */
 .post-layout-container {
@@ -183,15 +224,15 @@ img {
     max-width: 100%;
     height: auto;
     display: block; 
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--code-border);
 }
 
 pre {
     max-width: 100%;
     overflow-x: auto;
-    background: #f9f9f9;
+    background: var(--code-bg);
     padding: 15px;
-    border: 1px solid #eee;
+    border: 1px solid var(--code-border);
 }
 /* =========================================
    代码样式控制区 (Code Styling)
@@ -201,11 +242,11 @@ pre {
 p code, li code {
     font-family: "CodeNewRoman", "Menlo", "Consolas", "Monaco", monospace; /* 字体 */
     font-size: 0.85em;              /* 字号：通常比正文小一点更精致 */
-    background-color: #f4f4f4;      /* 背景色：浅灰 */
+    background-color: var(--code-bg);      /* 背景色：浅灰 */
     color: #d14;                    /* 文字颜色：比如设为深红 (Jekyll默认风格) 或者 #333 */
     padding: 2px 5px;               /* 内边距：让背景稍微宽一点 */
     border-radius: 3px;             /* 圆角 */
-    border: 1px solid #eee;         /* 细边框 */
+    border: 1px solid var(--code-bg);         /* 细边框 */
 }
 
 /* 2. 大段代码块 (Code Blocks) - 比如 ```python ... ``` */
@@ -214,11 +255,11 @@ pre {
     font-size: 0.85em;               /* 字号 */
     line-height: 1.5;               /* 行高 */
     
-    background: #f9f9f9;            /* 背景色：整块代码的背景 */
+    background: var(--code-bg);            /* 背景色：整块代码的背景 */
     /*color: #333;                    /* 代码文字颜色 */
     
     padding: 20px;                  /* 内边距：文字离边框的距离 */
-    border: 1px solid #eee;         /* 边框颜色 */
+    border: 1px solid var(--code-border);         /* 边框颜色 */
     border-radius: 5px;             /* 边框圆角 */
     
     margin: 30px 0;                 /* 上下外边距：代码块与正文的距离 */
