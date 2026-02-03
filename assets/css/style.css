@@ -114,3 +114,28 @@ body {
 /* 通用 */
 a { color: #000; text-decoration: none; transition: 0.1s; }
 a:hover { background-color: #000; color: #fff; }
+
+
+/* --- 修复换行问题的核心代码 --- */
+
+/* 1. 强制 Grid 子元素收缩 */
+main {
+    min-width: 0; /* 关键：允许网格区域比内容更小，从而触发换行 */
+    overflow-wrap: break-word; /* 强制长单词（如URL）换行 */
+    word-wrap: break-word; /* 兼容旧浏览器 */
+}
+
+/* 2. 限制图片最大宽度 */
+img {
+    max-width: 100%; /* 防止大图撑破布局 */
+    height: auto;
+}
+
+/*
+/* 3. 代码块单独处理 */
+/* 我们希望代码块内部滚动，而不是让整篇文章滚动 */
+/*pre {
+/*    max-width: 100%; /* 限制代码块宽度不超过父容器 */
+/*    overflow-x: auto; /* 超出部分显示内部滚动条 */
+/*    white-space: pre; /* 保持代码格式 */
+/*}
